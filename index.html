@@ -73,7 +73,7 @@ th{background:#eff6ff}
     <div class="table-wrap">
       <table>
         <thead><tr>
-          <th>Name</th><th>ID</th><th>Post</th><th>Salary</th><th>Present</th><th>Absent</th><th>Attendance</th><th>Month</th><th>Action</th>
+          <th>Name</th><th>ID</th><th>Post</th><th>Salary</th><th>Present</th><th>Absent</th><th>Attendance</th><th>Date</th><th>Action</th>
         </tr></thead>
         <tbody id="tbody"></tbody>
       </table>
@@ -133,7 +133,7 @@ function render(){
     return `<tr>
       <td><b>${esc(e.name)}</b></td><td>${esc(e.empId)}</td><td>${esc(e.post)}</td>
       <td>${money(e.salary)}</td><td class="present">${e.present}</td><td class="absent">${e.absent}</td>
-      <td>${pct}%</td><td>${e.month||'-'}</td>
+      <td>${pct}%</td><td>${e.month ? new Date(e.month).tolocaleDateString('en-GB'): '-'}</td>
       <td><div class="actions"><button class="btn-edit" onclick="editEmployee(${e.i})">Edit</button><button class="btn-danger" onclick="deleteEmployee(${e.i})">Delete</button></div></td>
     </tr>`;
   }).join('') : '<tr><td colspan="9" class="empty">Koi employee record nahi mila.</td></tr>';
