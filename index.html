@@ -55,7 +55,7 @@ th{background:#eff6ff}
       <div><label>Monthly Salary (₹)</label><input id="salary" type="number" min="0" placeholder="25000"></div>
       <div><label>Present Days</label><input id="present" type="number" min="0" value="0"></div>
       <div><label>Absent Days</label><input id="absent" type="number" min="0" value="0"></div>
-      <div><label>Month</label><input id="month" type="month"></div>
+      <div><label>Date</label><input id="month" type="date"></div>
       <div class="actions" style="align-items:end">
         <button onclick="saveEmployee()">Save Employee</button>
         <button class="btn-secondary" onclick="resetForm()">Reset</button>
@@ -87,7 +87,7 @@ let editIndex = -1;
 
 const $ = id => document.getElementById(id);
 const money = n => '₹' + Number(n||0).toLocaleString('en-IN');
-function monthNow(){ return new Date().toISOString().slice(0,7); }
+function monthNow(){ return new Date().toISOString().slice(0,10); }
 $('month').value = monthNow();
 
 function saveEmployee(){
