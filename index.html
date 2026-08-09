@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,144 +7,201 @@
 <style>
 *{box-sizing:border-box}
 body{margin:0;font-family:Arial,sans-serif;background:#f4f7fb;color:#1f2937}
-header{background:#2563eb;color:white;padding:18px 20px;text-align:center}
-header h1{margin:0;font-size:25px}
-.container{max-width:1100px;margin:20px auto;padding:0 14px}
-.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
-.card{background:white;border-radius:12px;padding:16px;box-shadow:0 2px 8px #00000012}
-.card b{display:block;font-size:23px;margin-top:6px}
-.panel{background:white;border-radius:12px;padding:18px;box-shadow:0 2px 8px #00000012;margin-bottom:18px}
-h2{margin:0 0 14px;font-size:20px}
-.form{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-label{font-size:13px;font-weight:bold}
-input,select,button{width:100%;padding:10px;border:1px solid #d1d5db;border-radius:8px;font-size:14px}
-button{cursor:pointer;border:0;background:#2563eb;color:white;font-weight:bold}
-button:hover{opacity:.9}
-.btn-danger{background:#dc2626}.btn-edit{background:#f59e0b}.btn-secondary{background:#64748b}
-.actions{display:flex;gap:7px}
-.actions button{width:auto;padding:7px 10px}
-.search{display:grid;grid-template-columns:1fr 180px;gap:10px;margin-bottom:14px}
-.table-wrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse;min-width:800px}
-th,td{padding:11px 9px;border-bottom:1px solid #e5e7eb;text-align:left;font-size:14px}
-th{background:#eff6ff}
-.present{color:#15803d;font-weight:bold}.absent{color:#dc2626;font-weight:bold}
-.empty{text-align:center;padding:25px;color:#6b7280}
-.note{font-size:12px;color:#6b7280;margin-top:8px}
-@media(max-width:800px){.cards{grid-template-columns:repeat(2,1fr)}.form{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:500px){.cards{grid-template-columns:1fr 1fr}.form,.search{grid-template-columns:1fr}.actions{flex-wrap:wrap}}
+.container{max-width:1200px;margin:30px auto;padding:0 16px}
+h1{margin-bottom:20px;color:#173b7a}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:22px}
+.card,.panel{background:#fff;border-radius:12px;box-shadow:0 3px 12px #00000012}
+.card{padding:20px}.card span{display:block;color:#666;margin-bottom:8px}.card strong{font-size:25px}
+.panel{padding:22px;margin-bottom:22px}
+h2{margin:0 0 18px;color:#263b5e}
+.form-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+label{font-weight:600;font-size:14px;display:block;margin-bottom:6px}
+input{width:100%;padding:11px;border:1px solid #ccd4df;border-radius:7px;font-size:15px}
+.actions{margin-top:18px;display:flex;gap:10px}
+button{border:0;border-radius:7px;padding:10px 17px;cursor:pointer;font-weight:600}
+.primary{background:#1677d2;color:#fff}.secondary{background:#334e7d;color:#fff}
+.danger{background:#dc3545;color:#fff}.edit{background:#f0ad00;color:#111}
+.search-row{display:flex;gap:12px;margin-bottom:16px}
+.search-row input{flex:1}
+table{width:100%;border-collapse:collapse}
+th,td{padding:12px 8px;border-bottom:1px solid #e5e7eb;text-align:left}
+th{background:#f7f9fc}
+.badge{font-weight:bold}
+.empty{text-align:center;color:#777;padding:25px}
+@media(max-width:800px){.cards,.form-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.cards,.form-grid{grid-template-columns:1fr}table{font-size:12px}.panel{overflow:auto}}
 </style>
 </head>
 <body>
-<header><h1>🚗 Rajbanshi Denting Painting</h1><div style='margin-top:5px;font-size:14px'>Employee Management System</div></header>
-
 <div class="container">
-  <div class="cards">
-    <div class="card">Total Employees<b id="totalEmp">0</b></div>
-    <div class="card">Total Salary<b id="totalSalary">₹0</b></div>
-    <div class="card">Total Present<b id="totalPresent">0</b></div>
-    <div class="card">Total Absent<b id="totalAbsent">0</b></div>
-  </div>
+<h1>Employee Management</h1>
 
-  <div class="panel">
-    <h2 id="formTitle">➕ Add Employee</h2>
-    <div class="form">
-      <div><label>Employee Name</label><input id="name" placeholder="e.g. Rahul Kumar"></div>
-      <div><label>Employee ID</label><input id="empId" placeholder="e.g. EMP001"></div>
-      <div><label>Post / Designation</label><input id="post" placeholder="e.g. Manager"></div>
-      <div><label>Monthly Salary (₹)</label><input id="salary" type="number" min="0" placeholder="25000"></div>
-      <div><label>Present Days</label><input id="present" type="number" min="0" value="0"></div>
-      <div><label>Absent Days</label><input id="absent" type="number" min="0" value="0"></div>
-      <div><label>Date</label><input id="month" type="date"></div>
-      <div class="actions" style="align-items:end">
-        <button onclick="saveEmployee()">Save Employee</button>
-        <button class="btn-secondary" onclick="resetForm()">Reset</button>
-      </div>
-    </div>
-    <div class="note">Data isi browser me save hota hai (Local Storage). Browser ka data clear karne par records hat sakte hain.</div>
-  </div>
+<div class="cards">
+<div class="card"><span>Total Employees</span><strong id="totalEmp">0</strong></div>
+<div class="card"><span>Total Salary</span><strong id="totalSalary">₹0</strong></div>
+<div class="card"><span>Total Present</span><strong id="totalPresent">0</strong></div>
+<div class="card"><span>Total Absent</span><strong id="totalAbsent">0</strong></div>
+</div>
 
-  <div class="panel">
-    <h2>👥 Employee Records</h2>
-    <div class="search">
-      <input id="search" oninput="render()" placeholder="🔍 Name, ID ya Post se search karein...">
-      <input id="filterMonth" type="month" onchange="render()">
-    </div>
-    <div class="table-wrap">
-      <table>
-        <thead><tr>
-          <th>Name</th><th>ID</th><th>Post</th><th>Salary</th><th>Present</th><th>Absent</th><th>Attendance</th><th>Date</th><th>Action</th>
-        </tr></thead>
-        <tbody id="tbody"></tbody>
-      </table>
-    </div>
-  </div>
+<div class="panel">
+<h2 id="formTitle">➕ Add Employee</h2>
+<form id="employeeForm" onsubmit="event.preventDefault();saveEmployee()">
+<div class="form-grid">
+<div><label>Employee Name</label><input id="name" placeholder="e.g. Rahul Kumar"></div>
+<div><label>Employee ID</label><input id="empId" placeholder="e.g. EMP001"></div>
+<div><label>Post / Designation</label><input id="post" placeholder="e.g. Manager"></div>
+<div><label>Monthly Salary (₹)</label><input id="salary" type="number" min="0" placeholder="25000"></div>
+<div><label>Present Days</label><input id="present" type="number" min="0" value="0"></div>
+<div><label>Absent Days</label><input id="absent" type="number" min="0" value="0"></div>
+<div><label>Date</label><input id="date" type="date"></div>
+</div>
+<div class="actions">
+<button class="primary" type="submit" id="saveBtn">Save Employee</button>
+<button class="secondary" type="button" onclick="resetForm()">Reset</button>
+</div>
+</form>
+<p style="color:#666;font-size:13px">Data isi browser me save hota hai (Local Storage).</p>
+</div>
+
+<div class="panel">
+<h2>👥 Employee Records</h2>
+<div class="search-row">
+<input id="search" placeholder="🔍 Name, ID ya Post se search karein..." oninput="render()">
+<input id="filterDate" type="month" onchange="render()" style="max-width:190px">
+</div>
+<table>
+<thead>
+<tr><th>Name</th><th>ID</th><th>Post</th><th>Salary</th><th>Present</th><th>Absent</th><th>Attendance</th><th>Date</th><th>Action</th></tr>
+</thead>
+<tbody id="tbody"></tbody>
+</table>
+</div>
 </div>
 
 <script>
-let employees = JSON.parse(localStorage.getItem('employees_v1') || '[]');
+let employees = JSON.parse(localStorage.getItem('employees_v2') || '[]');
 let editIndex = -1;
 
 const $ = id => document.getElementById(id);
-const money = n => '₹' + Number(n||0).toLocaleString('en-IN');
-function monthNow(){ return new Date().toISOString().slice(0,10); }
-$('month').value = monthNow();
+const money = n => '₹' + Number(n || 0).toLocaleString('en-IN');
+
+function today(){
+  const d = new Date();
+  return d.toISOString().slice(0,10);
+}
+
+function formatDate(value){
+  if(!value) return '-';
+  const p=value.split('-');
+  return p.length===3 ? `${p[2]}-${p[1]}-${p[0]}` : value;
+}
 
 function saveEmployee(){
-  const name=$('name').value.trim(), empId=$('empId').value.trim(), post=$('post').value.trim();
-  const salary=Number($('salary').value||0), present=Number($('present').value||0), absent=Number($('absent').value||0);
-  const month=$('month').value || monthNow();
-  if(!name || !empId || !post){ alert('Name, Employee ID aur Post bharna zaroori hai.'); return; }
-  if(present<0 || absent<0){ alert('Present/Absent days sahi bharein.'); return; }
-  const record={name,empId,post,salary,present,absent,month};
-  if(editIndex===-1) employees.push(record); else employees[editIndex]=record;
-  localStorage.setItem('employees_v1',JSON.stringify(employees));
-  resetForm(); render();
+  const name=$('name').value.trim();
+  const empId=$('empId').value.trim();
+  const post=$('post').value.trim();
+  const salary=Number($('salary').value || 0);
+  const present=Number($('present').value || 0);
+  const absent=Number($('absent').value || 0);
+  const date=$('date').value || today();
+
+  if(!name || !empId || !post){
+    alert('Name, Employee ID aur Post bharna zaroori hai.');
+    return;
+  }
+  if(present < 0 || absent < 0){
+    alert('Present/Absent days sahi bharein.');
+    return;
+  }
+
+  const record={name,empId,post,salary,present,absent,date};
+
+  if(editIndex === -1) employees.push(record);
+  else employees[editIndex]=record;
+
+  localStorage.setItem('employees_v2',JSON.stringify(employees));
+  resetForm();
+  render();
+  alert('Employee data successfully save ho gaya.');
 }
 
 function editEmployee(i){
-  const e=employees[i]; editIndex=i;
-  $('name').value=e.name; $('empId').value=e.empId; $('post').value=e.post;
-  $('salary').value=e.salary; $('present').value=e.present; $('absent').value=e.absent; $('month').value=e.month;
+  const e=employees[i];
+  if(!e) return;
+  editIndex=i;
+  $('name').value=e.name || '';
+  $('empId').value=e.empId || '';
+  $('post').value=e.post || '';
+  $('salary').value=e.salary || 0;
+  $('present').value=e.present || 0;
+  $('absent').value=e.absent || 0;
+  $('date').value=e.date || today();
   $('formTitle').textContent='✏️ Edit Employee';
+  $('saveBtn').textContent='Update Employee';
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
 function deleteEmployee(i){
-  if(confirm('Kya aap is employee ka record delete karna chahte hain?')){
-    employees.splice(i,1); localStorage.setItem('employees_v1',JSON.stringify(employees)); render();
-  }
+  if(!confirm('Kya aap is employee ka record delete karna chahte hain?')) return;
+  employees.splice(i,1);
+  localStorage.setItem('employees_v2',JSON.stringify(employees));
+  render();
 }
 
 function resetForm(){
-  editIndex=-1; $('formTitle').textContent='➕ Add Employee';
-  $('name').value=''; $('empId').value=''; $('post').value=''; $('salary').value='';
-  $('present').value=0; $('absent').value=0; $('month').value=monthNow();
+  editIndex=-1;
+  $('employeeForm').reset();
+  $('present').value=0;
+  $('absent').value=0;
+  $('date').value=today();
+  $('formTitle').textContent='➕ Add Employee';
+  $('saveBtn').textContent='Save Employee';
 }
 
 function render(){
-  const q=$('search').value.toLowerCase().trim(), fm=$('filterMonth').value;
+  const q=$('search').value.toLowerCase().trim();
+  const fm=$('filterDate').value;
+
   const rows=employees.map((e,i)=>({...e,i})).filter(e=>{
     const text=(e.name+' '+e.empId+' '+e.post).toLowerCase();
-    return (!q||text.includes(q)) && (!fm||e.month===fm);
+    const searchOK=!q || text.includes(q);
+    const monthOK=!fm || (e.date||'').startsWith(fm);
+    return searchOK && monthOK;
   });
+
   $('tbody').innerHTML=rows.length ? rows.map(e=>{
-    const total=e.present+e.absent, pct=total ? ((e.present/total)*100).toFixed(1) : '0.0';
+    const total=e.present+e.absent;
+    const pct=total ? ((e.present/total)*100).toFixed(1) : '0.0';
     return `<tr>
-      <td><b>${esc(e.name)}</b></td><td>${esc(e.empId)}</td><td>${esc(e.post)}</td>
-      <td>${money(e.salary)}</td><td class="present">${e.present}</td><td class="absent">${e.absent}</td>
-      <td>${pct}%</td><td>${e.month ? new Date(e.month).tolocaleDateString('en-GB'): '-'}</td>
-      <td><div class="actions"><button class="btn-edit" onclick="editEmployee(${e.i})">Edit</button><button class="btn-danger" onclick="deleteEmployee(${e.i})">Delete</button></div></td>
+      <td><b>${esc(e.name)}</b></td>
+      <td>${esc(e.empId)}</td>
+      <td>${esc(e.post)}</td>
+      <td>${money(e.salary)}</td>
+      <td>${e.present}</td>
+      <td>${e.absent}</td>
+      <td class="badge">${pct}%</td>
+      <td>${formatDate(e.date)}</td>
+      <td>
+        <button class="edit" onclick="editEmployee(${e.i})">Edit</button>
+        <button class="danger" onclick="deleteEmployee(${e.i})">Delete</button>
+      </td>
     </tr>`;
   }).join('') : '<tr><td colspan="9" class="empty">Koi employee record nahi mila.</td></tr>';
 
-  const stats=employees.filter(e=>!fm||e.month===fm);
+  const stats=employees.filter(e=>!fm || (e.date||'').startsWith(fm));
   $('totalEmp').textContent=stats.length;
   $('totalSalary').textContent=money(stats.reduce((s,e)=>s+Number(e.salary||0),0));
   $('totalPresent').textContent=stats.reduce((s,e)=>s+Number(e.present||0),0);
   $('totalAbsent').textContent=stats.reduce((s,e)=>s+Number(e.absent||0),0);
 }
-function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
+function esc(s){
+  return String(s).replace(/[&<>"']/g,c=>({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  }[c]));
+}
+
+$('date').value=today();
 render();
 </script>
 </body>
